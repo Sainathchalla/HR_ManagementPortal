@@ -1,0 +1,33 @@
+server:
+  port: 8091
+
+spring:
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+  application:
+    name: employee-service
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:employeedb;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS employeeschema
+    platform: h2
+    initialization-mode: always
+
+logging:
+  level:
+    org:
+      springframework=DEBUG:
+
+actuators:
+  username: test
+  password: test

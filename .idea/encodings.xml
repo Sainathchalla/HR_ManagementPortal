@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/career-service/career-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/career-service/career-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/config-server/config-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/config-server/config-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/employee-service/employee-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/employee-service/employee-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway-service/gateway-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway-service/gateway-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payroll-service/payroll-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payroll-service/payroll-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/project-service/project-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/project-service/project-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/registry-service/registry-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/registry-service/registry-service/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
