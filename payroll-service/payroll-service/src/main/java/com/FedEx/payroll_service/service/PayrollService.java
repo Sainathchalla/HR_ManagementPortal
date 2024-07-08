@@ -18,5 +18,9 @@ public interface PayrollService {
     void deletePayroll(Long payrollId);
 
     List<PayrollResponseDTO> getAllPayrolls();
+
+    boolean existsByEmployeeId(Long employeeId);
+
+    Long getPayrollId(Long employeeId) throws Exception;
 }
 

@@ -57,16 +57,16 @@ public class ProjectController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{projectId}/assign")
-    public ResponseEntity<Void> assignEmployeeToProject(@PathVariable Long projectId,
-                                                        @RequestBody EmployeeAssignmentDTO employeeAssignmentDTO) {
-        projectService.assignEmployeeToProject(projectId, employeeAssignmentDTO);
-        return ResponseEntity.ok().build();
-    }
-
-    @GetMapping("/{projectId}/employees")
-    public ResponseEntity<List<EmployeeAssignmentDTO>> getEmployeesAssignedToProject(@PathVariable Long projectId) {
-        List<EmployeeAssignmentDTO> employees = projectService.getEmployeesAssignedToProject(projectId);
-        return ResponseEntity.ok(employees);
-    }
+//    @PostMapping("/{projectId}/assign")
+//    public ResponseEntity<Void> assignEmployeeToProject(@PathVariable Long projectId,
+//                                                        @RequestBody EmployeeAssignmentDTO employeeAssignmentDTO) {
+//        projectService.assignEmployeeToProject(projectId, employeeAssignmentDTO);
+//        return ResponseEntity.ok().build();
+//    }
+//
+//    @GetMapping("/{projectId}/employees")
+//    public ResponseEntity<List<EmployeeAssignmentDTO>> getEmployeesAssignedToProject(@PathVariable Long projectId) {
+//        List<EmployeeAssignmentDTO> employees = projectService.getEmployeesAssignedToProject(projectId);
+//        return ResponseEntity.ok(employees);
+//    }
 }

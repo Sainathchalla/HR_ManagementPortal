@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/payroll")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PayrollController {
 
     private final PayrollService payrollService;
@@ -26,6 +27,12 @@ public class PayrollController {
     public ResponseEntity<PayrollResponseDTO> getPayrollDetails(@PathVariable Long payrollId) {
         PayrollResponseDTO payroll = payrollService.getPayrollDetails(payrollId);
         return ResponseEntity.ok().body(payroll);
+    }
+
+    @GetMapping("/{employeeId}/payrollId")
+    public ResponseEntity<Long> getPayrollId(@PathVariable Long employeeId) throws Exception {
+        Long payrollId = payrollService.getPayrollId(employeeId);
+        return new ResponseEntity<>(payrollId, HttpStatus.OK);
     }
 
     @GetMapping
@@ -51,6 +58,12 @@ public class PayrollController {
     public ResponseEntity<Void> deletePayroll(@PathVariable Long payrollId) {
         payrollService.deletePayroll(payrollId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/exists/employee/{employeeId}")
+    public ResponseEntity<Boolean> payrollExistsForEmployee(@PathVariable Long employeeId) {
+        boolean exists = payrollService.existsByEmployeeId(employeeId);
+        return ResponseEntity.ok(exists);
     }
 }
 

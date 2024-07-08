@@ -94,4 +94,19 @@ public class PayrollServiceImpl implements PayrollService {
         // Delete Payroll entity by ID
         payrollRepository.deleteById(payrollId);
     }
+
+    @Override
+    public boolean existsByEmployeeId(Long employeeId) {
+        return payrollRepository.existsByEmployeeId(employeeId);
+    }
+
+    @Override
+    public Long getPayrollId(Long employeeId) throws Exception {
+        Payroll payroll = payrollRepository.findByEmployeeId(employeeId);
+        if (payroll != null) {
+            return payroll.getId();
+        } else {
+            throw new Exception("Payroll not found for this employeeId :: " + employeeId);
+        }
+    }
 }

@@ -5,11 +5,12 @@ public class EmployeeResponseDTO {
     private String name;
     private String email;
     private String phoneNumber;
+    private String password;
     private String address;
     private String dateOfBirth;
     private String hireDate;
     private String position;
-    private Long departmentId;
+//    private String department;
 
     public Long getId() {
         return id;
@@ -33,6 +34,14 @@ public class EmployeeResponseDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhoneNumber() {
@@ -75,13 +84,13 @@ public class EmployeeResponseDTO {
         this.position = position;
     }
 
-    public Long getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
-    }
+//    public String getDepartment() {
+//        return department;
+//    }
+//
+//    public void setDepartment(String department) {
+//        this.department = department;
+//    }
 
 
     // Getters and setters

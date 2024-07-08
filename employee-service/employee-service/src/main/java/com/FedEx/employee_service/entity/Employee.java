@@ -12,12 +12,13 @@ public class Employee {
     private Long id;
     private String name;
     private String email;
+    private String password;
     private String phoneNumber;
     private String address;
     private String dateOfBirth;
     private String hireDate;
     private String position;
-    private Long departmentId;
+    //private String department;
 
     public Long getId() {
         return id;
@@ -41,6 +42,14 @@ public class Employee {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhoneNumber() {
@@ -83,13 +92,13 @@ public class Employee {
         this.position = position;
     }
 
-    public Long getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
-    }
+//    public String getDepartment() {
+//        return department;
+//    }
+//
+//    public void setDepartment(String department) {
+//        this.department = department;
+//    }
 
     // Getters and setters
 }

@@ -8,6 +8,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
@@ -29,6 +32,15 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = mapRequestDTOToProject(projectRequestDTO);
         Project savedProject = projectRepository.save(project);
         return mapProjectToResponseDTO(savedProject);
+    }
+
+    @Override
+    public List<ProjectResponseDTO> getAllProjects() {
+        List<Project> projects = projectRepository.findAll();
+
+        return projects.stream()
+                .map(this::mapProjectToResponseDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
