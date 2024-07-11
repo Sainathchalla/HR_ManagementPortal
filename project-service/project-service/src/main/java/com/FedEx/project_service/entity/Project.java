@@ -2,7 +2,9 @@ package com.FedEx.project_service.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "project")
@@ -17,13 +19,16 @@ public class Project {
     private String description;
 
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private String startDate;
 
     @Column(name = "end_date")
-    private LocalDate endDate;
+    private String endDate;
 
-    @Column(name = "project_manager_id")
-    private Long projectManagerId;
+//    @ManyToMany
+//    @JoinTable(name = "project_employee",
+//            joinColumns = @JoinColumn(name = "project_id"),
+//            inverseJoinColumns = @JoinColumn(name = "employee_id"))
+//    private Set<Employee> employees = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -49,29 +54,27 @@ public class Project {
         this.description = description;
     }
 
-    public LocalDate getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
-    public Long getProjectManagerId() {
-        return projectManagerId;
-    }
-
-    public void setProjectManagerId(Long projectManagerId) {
-        this.projectManagerId = projectManagerId;
-    }
-
-    // Constructors, getters, setters
+//    public Set<Employee> getEmployees() {
+//        return employees;
+//    }
+//
+//    public void setEmployees(Set<Employee> employees) {
+//        this.employees = employees;
+//    }
 }

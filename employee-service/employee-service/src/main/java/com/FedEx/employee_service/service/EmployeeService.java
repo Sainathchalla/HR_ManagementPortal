@@ -24,4 +24,5 @@ public interface EmployeeService {
     EmployeeResponseDTO authenticate(String email, String password) throws ChangeSetPersister.NotFoundException;
 
     boolean existsById(Long id);
+
 }

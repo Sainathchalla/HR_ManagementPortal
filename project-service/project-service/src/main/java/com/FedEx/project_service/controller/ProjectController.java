@@ -2,6 +2,7 @@ package com.FedEx.project_service.controller;
 
 import com.FedEx.project_service.dto.ProjectRequestDTO;
 import com.FedEx.project_service.dto.ProjectResponseDTO;
+import com.FedEx.project_service.entity.EmployeeResponseDTO;
 import com.FedEx.project_service.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,9 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/project")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProjectController {
 
     private final ProjectService projectService;
@@ -57,16 +60,29 @@ public class ProjectController {
         return ResponseEntity.noContent().build();
     }
 
-//    @PostMapping("/{projectId}/assign")
-//    public ResponseEntity<Void> assignEmployeeToProject(@PathVariable Long projectId,
-//                                                        @RequestBody EmployeeAssignmentDTO employeeAssignmentDTO) {
-//        projectService.assignEmployeeToProject(projectId, employeeAssignmentDTO);
-//        return ResponseEntity.ok().build();
-//    }
-//
-//    @GetMapping("/{projectId}/employees")
-//    public ResponseEntity<List<EmployeeAssignmentDTO>> getEmployeesAssignedToProject(@PathVariable Long projectId) {
-//        List<EmployeeAssignmentDTO> employees = projectService.getEmployeesAssignedToProject(projectId);
-//        return ResponseEntity.ok(employees);
-//    }
+    @PostMapping("/{projectId}/assign")
+    public ResponseEntity<?> assignEmployeesToProject(@PathVariable Long projectId, @RequestBody List<Long> employeeIds) {
+        projectService.assignEmployeesToProject(projectId, employeeIds);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{projectId}/employees")
+    public List<Long> getEmployeesByProjectId(@PathVariable Long projectId) {
+        return projectService.getEmployeeIdsByProjectId(projectId);
+    }
+
+    @GetMapping("/{projectId}/employees/details")
+    public List<EmployeeResponseDTO> getEmployeesDetailsByProjectId(@PathVariable Long projectId) {
+        return projectService.getEmployeesDetailsByProjectId(projectId);
+    }
+
+    @GetMapping("{employeeId}/projects")
+    public List<Long> getProjectsByEmployeeId(@PathVariable Long employeeId) {
+        return projectService.getProjectIdsByEmployeeId(employeeId);
+    }
+
+    @GetMapping("/{employeeId}/projects/details")
+    public List<ProjectResponseDTO> getProjectsDetailsByEmployeeId(@PathVariable Long employeeId) {
+        return projectService.getProjectsDetailsByEmployeeId(employeeId);
+    }
 }

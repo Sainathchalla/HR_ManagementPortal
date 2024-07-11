@@ -1,6 +1,10 @@
 server:
   port: 8094
 
+employee:
+  service:
+    url=http://localhost:8091/employees
+
 spring:
   application:
     name: project-service

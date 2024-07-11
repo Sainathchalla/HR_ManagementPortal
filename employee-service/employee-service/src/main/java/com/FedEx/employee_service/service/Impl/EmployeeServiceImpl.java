@@ -14,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -78,11 +75,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return objectMapper.convertValue(savedEmployee, EmployeeResponseDTO.class);
     }
 
-//    @Override
-//    public Set<EmployeeResponseDTO> getEmployeesByIds(Set<Long> employeeIds) {
-//        return employeeRepository.findByIdIn(employeeIds);
-//    }
-
     @Override
     public EmployeeResponseDTO authenticate(String email, String password) {
         Optional<Employee> employeeOptional = employeeRepository.findByEmail(email);
@@ -101,5 +93,4 @@ public class EmployeeServiceImpl implements EmployeeService {
     public boolean existsById(Long id) {
         return employeeRepository.existsById(id);
     }
-
 }

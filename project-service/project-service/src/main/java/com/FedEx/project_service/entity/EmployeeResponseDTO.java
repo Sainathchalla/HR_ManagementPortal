@@ -1,29 +1,16 @@
-package com.FedEx.employee_service.entity;
+package com.FedEx.project_service.entity;
 
-//import com.FedEx.project_service.entity.EmployeeProject;
-import jakarta.persistence.*;
-
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
-
-@Entity
-@Table(name = "employees")
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EmployeeResponseDTO {
     private Long id;
     private String name;
     private String email;
-    private String password;
     private String phoneNumber;
+    private String password;
     private String address;
     private String dateOfBirth;
     private String hireDate;
     private String position;
-
-//    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-//    private Set<EmployeeProject> employeeProjects = new HashSet<>();
+//    private String department;
 
     public Long getId() {
         return id;
@@ -97,21 +84,14 @@ public class Employee {
         this.position = position;
     }
 
-//    public Set<EmployeeProject> getEmployeeProjects() {
-//        return employeeProjects;
-//    }
-//
-//    public void setEmployeeProjects(Set<EmployeeProject> employeeProjects) {
-//        this.employeeProjects = employeeProjects;
-//    }
-
-    //    public String getDepartment() {
+//    public String getDepartment() {
 //        return department;
 //    }
 //
 //    public void setDepartment(String department) {
 //        this.department = department;
 //    }
+
 
     // Getters and setters
 }
