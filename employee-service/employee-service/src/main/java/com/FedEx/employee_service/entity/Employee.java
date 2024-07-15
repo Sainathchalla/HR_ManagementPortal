@@ -14,16 +14,15 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(unique = true)
     private String email;
     private String password;
+    @Column(unique = true)
     private String phoneNumber;
     private String address;
     private String dateOfBirth;
     private String hireDate;
     private String position;
-
-//    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-//    private Set<EmployeeProject> employeeProjects = new HashSet<>();
 
     public Long getId() {
         return id;

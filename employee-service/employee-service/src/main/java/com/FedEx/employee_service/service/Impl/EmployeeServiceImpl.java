@@ -28,6 +28,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeResponseDTO createEmployee(EmployeeRequestDTO employeeRequestDTO) {
+        if (employeeRepository.existsByEmail(employeeRequestDTO.getEmail())) {
+            throw new IllegalArgumentException("Email already exists");
+        }
+        // Check if phoneNumber is unique
+        if (employeeRepository.existsByPhoneNumber(employeeRequestDTO.getPhoneNumber())) {
+            throw new IllegalArgumentException("Phone number already exists");
+        }
         Employee employee = objectMapper.convertValue(employeeRequestDTO, Employee.class);
         Employee savedEmployee = employeeRepository.save(employee);
         return objectMapper.convertValue(savedEmployee, EmployeeResponseDTO.class);

@@ -11,5 +11,6 @@ import java.util.Set;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Optional<Employee> findByEmail (String email);
-//    Set<EmployeeResponseDTO> findByIdIn(Set<Long> employeeIds);
+    boolean existsByEmail(String email);
+    boolean existsByPhoneNumber(String phoneNumber);
 }
