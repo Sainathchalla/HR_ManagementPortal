@@ -3,6 +3,7 @@ package com.FedEx.employee_service.service;
 import com.FedEx.employee_service.dto.EmployeeRequestDTO;
 import com.FedEx.employee_service.dto.EmployeeResponseDTO;
 import com.FedEx.employee_service.entity.Employee;
+import com.FedEx.employee_service.entity.NotificationMessage;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import org.springframework.data.crossstore.ChangeSetPersister;
 
@@ -25,4 +26,5 @@ public interface EmployeeService {
 
     boolean existsById(Long id);
 
+    List<NotificationMessage> getNotificationsForEmployee(Long employeeId);
 }

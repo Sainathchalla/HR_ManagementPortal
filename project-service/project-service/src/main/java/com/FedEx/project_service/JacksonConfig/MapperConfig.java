@@ -22,9 +22,4 @@ public class MapperConfig {
 
         return objectMapper;
     }
-
-//    @Bean
-//    public RestTemplate restTemplate() {
-//        return new RestTemplate();
-//    }
 }

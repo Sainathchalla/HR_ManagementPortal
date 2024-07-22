@@ -16,6 +16,7 @@ public class Employee {
     private String name;
     @Column(unique = true)
     private String email;
+    private String salt;
     private String password;
     @Column(unique = true)
     private String phoneNumber;
@@ -46,6 +47,14 @@ public class Employee {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public String getPassword() {

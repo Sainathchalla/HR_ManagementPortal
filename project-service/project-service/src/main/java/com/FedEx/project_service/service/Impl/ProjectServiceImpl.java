@@ -1,27 +1,26 @@
 package com.FedEx.project_service.service.Impl;
+//import com.FedEx.project_service.JMS.NotificationProducer;
+import com.FedEx.project_service.Exceptions.ProjectNotFoundException;
+import com.FedEx.project_service.JMS.JmsProducer;
 import com.FedEx.project_service.dto.ProjectRequestDTO;
 import com.FedEx.project_service.dto.ProjectResponseDTO;
 import com.FedEx.project_service.entity.EmployeeProject;
+import com.FedEx.project_service.entity.NotificationMessage;
 import com.FedEx.project_service.entity.Project;
 import com.FedEx.project_service.repository.EmployeeProjectRepository;
 import com.FedEx.project_service.repository.ProjectRepository;
 import com.FedEx.project_service.service.ProjectService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import com.FedEx.project_service.entity.EmployeeResponseDTO;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +35,12 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     private RestTemplate restTemplate; // Ensure RestTemplate is configured in your application
+
+    @Autowired
+    private JmsTemplate jmsTemplate;
+
+    @Autowired
+    private JmsProducer jmsProducer;
 
     String baseUrl = "http://localhost:8091/employees";
 //    @Value("${http://localhost:8091/employees}")
@@ -88,17 +93,6 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepository.deleteById(projectId);
     }
 
-//    @Override
-//    public void assignEmployeesToProject(Long projectId, List<Long> employeeIds) {
-//        // Logic to assign employees to a project
-//        for (Long employeeId : employeeIds) {
-//            EmployeeProject assignment = new EmployeeProject();
-//            assignment.setEmployeeId(employeeId);
-//            assignment.setProjectId(projectId);
-//            employeeProjectRepository.save(assignment);
-//        }
-//    }
-
     @Override
     @Transactional
     public void assignEmployeesToProject(Long projectId, List<Long> employeeIds) {
@@ -112,20 +106,39 @@ public class ProjectServiceImpl implements ProjectService {
                 .filter(id -> !employeeIds.contains(id))
                 .collect(Collectors.toList());
 
+        String projectName = projectRepository.findById(projectId).orElseThrow(() -> new ProjectNotFoundException(projectId)).getName();
+        if(projectName == null) {
+            return;
+        }
         // Add new employees
         for (Long employeeId : employeesToAdd) {
             EmployeeProject assignment = new EmployeeProject();
             assignment.setEmployeeId(employeeId);
             assignment.setProjectId(projectId);
             employeeProjectRepository.save(assignment);
+
+            // Send notification
+            sendNotification(projectName, projectId, "assigned", employeeId);
+            System.out.println("Sent message: ");
         }
 
         // Remove de-selected employees
         for (Long employeeId : employeesToRemove) {
             employeeProjectRepository.deleteByProjectIdAndEmployeeId(projectId, employeeId);
+
+            // Send notification
+            sendNotification(projectName, projectId, "deassigned", employeeId);
         }
     }
 
+    private void sendNotification(String projectName, Long projectId, String status, Long employeeId) {
+        NotificationMessage message = new NotificationMessage();
+        message.setProjectName(projectName);
+        message.setProjectId(projectId);
+        message.setStatus(status);
+        message.setEmployeeIds(List.of(employeeId));
+        jmsTemplate.convertAndSend("notificationQueue", message);
+    }
 
     @Override
     public List<Long> getEmployeeIdsByProjectId(Long projectId) {

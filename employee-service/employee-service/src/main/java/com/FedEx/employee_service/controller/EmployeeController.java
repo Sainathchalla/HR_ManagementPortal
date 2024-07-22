@@ -10,10 +10,8 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/employees")
@@ -71,11 +69,4 @@ public class EmployeeController {
         EmployeeResponseDTO employee = employeeService.partiallyUpdateEmployee(id, updates);
         return ResponseEntity.ok(employee);
     }
-
-//    @PostMapping("/get-by-ids")
-//    public ResponseEntity<List<EmployeeResponseDTO>> getEmployeesByIds(@RequestBody Set<Long> employeeIds) {
-//        Set<EmployeeResponseDTO> employees = employeeService.getEmployeesByIds(employeeIds);
-//        List<EmployeeResponseDTO> employeeList = new ArrayList<>(employees);
-//        return ResponseEntity.ok(employeeList); // Convert Set to List for ResponseEntity
-//    }
 }
