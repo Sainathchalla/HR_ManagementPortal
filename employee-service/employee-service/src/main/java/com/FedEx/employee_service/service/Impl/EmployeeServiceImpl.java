@@ -10,10 +10,7 @@ import com.FedEx.employee_service.service.EmployeeService;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -129,20 +126,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         throw new RuntimeException("Employee not found");
     }
-
-//    @Override
-//    public EmployeeResponseDTO authenticate(String email, String password) {
-//        Optional<Employee> employeeOptional = employeeRepository.findByEmail(email);
-//
-//        if (employeeOptional.isPresent()) {
-//            Employee employee = employeeOptional.get();
-//            if (employee.getPassword().equals(password)) {
-//                EmployeeResponseDTO dto = objectMapper.convertValue(employee, EmployeeResponseDTO.class);
-//                return dto;
-//            }
-//        }
-//        throw new RuntimeException("Employee not found");
-//    }
 
     @Override
     public boolean existsById(Long id) {

@@ -6,9 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="payroll-service" />
-        <module name="registry-service" />
         <module name="career-service" />
+        <module name="payroll-service" />
         <module name="project-service" />
         <module name="employee-service" />
       </profile>
@@ -16,6 +15,7 @@
     <bytecodeTargetLevel>
       <module name="config-server" target="17" />
       <module name="gateway-service" target="17" />
+      <module name="registry-service" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

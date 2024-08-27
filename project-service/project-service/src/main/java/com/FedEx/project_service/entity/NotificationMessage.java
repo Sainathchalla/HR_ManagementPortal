@@ -57,6 +57,4 @@ public class NotificationMessage implements Serializable {
     public void setEmployeeIds(List<Long> employeeIds) {
         this.employeeIds = employeeIds;
     }
-
-    // Constructors, getters, and setters
 }
